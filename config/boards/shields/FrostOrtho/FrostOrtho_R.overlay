@@ -2,8 +2,6 @@
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <input/processors/runtime-input-processor.dtsi>
-#include <behaviors/battery_history_request.dtsi>
 
 &default_transform {
     col-offset = <6>;
@@ -19,19 +17,6 @@
         ;
 };
 
-&zip_temp_layer {
-    // キー入力後400ms以内はAMLに切り替わらない
-    require-prior-idle-ms = <400>;
-    // AMLから離脱しないキー
-    excluded-positions = <
-        6 // U 左クリック
-        7 // I 右クリック
-        8 // O 中央クリック
-        20 // Z Shift
-        30 // Control
-        32 // Alt
-    >;
-};
 
 / {
     input_processors {
@@ -58,10 +43,7 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        // input-processors = <&mouse_runtime_input_processor>;
         input-processors = <
-            &mouse_runtime_input_processor
-            &zip_temp_layer 6 100000 // AMLレイヤー、タイムアウト時間
             &zip_xy_scaler 2 3 // カーソル移動量2/3倍
             &zip_xy_transform INPUT_TRANSFORM_X_INVERT // カーソルの移動方向調整
             &zip_xy_transform INPUT_TRANSFORM_Y_INVERT // カーソルの移動方向調整
@@ -70,23 +52,13 @@
 };
 
 &trackball_listener {
-    scroller_y {
-        layers = <5>; // 縦スクロールレイヤー
+    // PrimeOrb's hold-scroll layers activate layer 9.
+    scroller {
+        layers = <9>;
         input-processors = <
-            // &scroll_runtime_input_processor
-            &zip_scroll_transform (INPUT_TRANSFORM_X_INVERT) // スクロール方向調整
             &zip_xy_to_scroll_mapper
-            &zip_scroll_x_scaler 0 3 // X軸スクロール量0/3倍
-            &zip_scroll_y_scaler 2 3 // Y軸スクロール量2/3倍
-        >;
-    };
-    scroller_x {
-        layers = <7>; // 横スクロールレイヤー
-        input-processors = <
-            &zip_scroll_transform (INPUT_TRANSFORM_X_INVERT) // スクロール方向調整
-            &zip_xy_to_scroll_mapper
-            &zip_scroll_x_scaler 2 3 // X軸スクロール量2/3倍
-            &zip_scroll_y_scaler 0 3 // Y軸スクロール量0/3倍
+            &zip_scroll_x_scaler 2 3
+            &zip_scroll_y_scaler 2 3
         >;
     };
 };
@@ -129,3 +101,6 @@
 };
 
 
+
+// D6/D7 are matrix pins; keep the physical UART disabled.
+&xiao_serial { status = "disabled"; };

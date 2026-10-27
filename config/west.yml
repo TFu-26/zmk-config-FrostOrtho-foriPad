@@ -2,43 +2,16 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: caksoylar
-      url-base: https://github.com/caksoylar
-    - name: sekigon-gonnoc  # PAW3222
+    - name: sekigon-gonnoc
       url-base: https://github.com/sekigon-gonnoc
-    - name: cormoran
-      url-base: https://github.com/cormoran
-    - name: imo00o
-      url-base: https://github.com/imo00o
   projects:
-    #　- name: zmk
-    #   remote: zmkfirmware
-    #   revision: v0.3.0
     - name: zmk
-      remote: cormoran
-      revision: v0.3-branch+dya
+      remote: zmkfirmware
+      # Official v0.3-branch, matching the validated PrimeOrb base.
+      revision: acfd8e5ea76cf23ad1c9b6b99848f97a95224257
       import: app/west.yml
     - name: zmk-driver-paw3222
       remote: sekigon-gonnoc
-      revision: main
-    - name: zmk-rgbled-widget
-      remote: caksoylar
-      revision: v0.3.0
-    # DYA Studio モジュール
-    - name: zmk-module-ble-management
-      remote: cormoran
-      revision: zmk-v0.3.0.0
-    - name: zmk-module-battery-history
-      remote: cormoran
-      revision: main
-    - name: zmk-module-settings-rpc
-      remote: cormoran
-      revision: zmk-v0.3.0.0
-    - name: zmk-module-runtime-input-processor
-      remote: cormoran
-      revision: zmk-v0.3.0.0
-    - name: zmk-behavior-runtime-sensor-rotate
-      remote: cormoran
-      revision: zmk-v0.3.0.0
+      revision: df652881be2520bde4f64ab6ca35e4c5708f4f9b
   self:
     path: config

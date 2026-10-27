@@ -1,14 +1,18 @@
 name: Build ZMK Firmware
-
-on:
-  push:
-    paths:
-      - 'config/**'
-  pull_request:
-    paths:
-      - 'config/**'
-  workflow_dispatch:
-
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate matrix and input configuration
+        run: python3 tests/test_configuration.py
+      - name: Test encoder state machine
+        run: |
+          g++ -std=c++17 -Wall -Wextra -Werror -fsanitize=address,undefined tests/test_encoder_decoder.cpp -o /tmp/test-encoder
+          /tmp/test-encoder
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3.0
+    needs: validate
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@acfd8e5ea76cf23ad1c9b6b99848f97a95224257

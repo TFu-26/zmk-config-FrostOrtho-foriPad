@@ -1,3 +1,12 @@
+# FrostOrtho for iPad mini
+
+このForkは初期ロット・PAW3222換装済みFrostOrthoをiPad mini向けに調整した版です。
+新しい配列・配線比較・ビルドと書き込み手順は [iPad mini向けガイド](docs/ipad-mini.md) を参照してください。
+
+以下は元プロジェクトの説明です。元の firmware/ とキーマップ画像はこの改修版の成果物ではありません。
+
+---
+
 # FrostOrtho
 FrostOrthoをご購入いただきありがとうございます！  
 ガイドをご一読いただき、使用を開始してください。気に入っていただけましたら、X等で「#FrostOrtho」で宣伝いただけると大喜びします。  
@@ -44,7 +53,7 @@ FrostOrthoをご購入いただきありがとうございます！
   - [FrostOrtho-paw3222](https://github.com/imo00o/FrostOrtho-paw3222)  
   badjeffさんの設計を参考にさせていただきました。  
 - 初期ファームウェア：[firmware](./firmware/)
-  
+
 ## 互換性のあるキーキャップ・トラックボール・キースイッチ
 ### キーキャップ
 17mm狭ピッチのキーキャップが使用できます。  
