@@ -1,0 +1,23 @@
+{
+  "upstream": {
+    "repository": "imo00o/zmk-config-FrostOrtho",
+    "commit": "6d6fb60ef1968b15b758fc931d2201c48f0c5e31"
+  },
+  "references": [
+    {
+      "repository": "TFu-26/zmk-config-PrimeOrb-Mini",
+      "commit": "90934dc58b2e635c1cef7f51ff3484866787962a"
+    },
+    {
+      "repository": "TFu-26/zmk-config-PrimeOrb-Standard",
+      "commit": "ee4a18352e735215f283d43f817ae3c9fdf75b46"
+    }
+  ],
+  "zmk": "acfd8e5ea76cf23ad1c9b6b99848f97a95224257",
+  "paw3222": "df652881be2520bde4f64ab6ca35e4c5708f4f9b",
+  "owner_confirmed": {
+    "detents_per_rotation": 24,
+    "host_layout": "JIS"
+  },
+  "physical_hardware_verified": false
+}
