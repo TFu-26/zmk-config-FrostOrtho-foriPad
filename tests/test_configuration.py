@@ -12,7 +12,7 @@ class Configuration(unittest.TestCase):
         layers = re.findall(
             r'display-name = "[^"]+";\s*bindings = <(.*?)>;\s*sensor-bindings = <(.*?)>;',
             keymap, re.S)
-        self.assertEqual(len(layers), 8)
+        self.assertEqual(len(layers), 11)
         for keys, sensors in layers:
             self.assertEqual(len(re.findall(r'&\w+', keys)), 41)
             self.assertEqual(re.findall(r'&\w+', sensors), ["&scroll_up_down"])
@@ -24,6 +24,30 @@ class Configuration(unittest.TestCase):
             (str(r), str(c)) for r in range(4) for c in range(11)
             if c != 5 or r == 3})
         self.assertEqual(dtsi.count("&key_physical_attrs"), 41)
+
+    def test_primeorb_mapping_and_reachability(self):
+        import json
+        mapping = json.loads((ROOT / "docs/keymap-mapping.json").read_text(encoding="utf-8"))
+        positions = mapping["destination_to_source"]
+        self.assertEqual(len(set(positions)), 41)
+        self.assertEqual(set(range(43)) - set(positions), {15, 27})
+        self.assertEqual(positions[36:41], [40, 41, 28, 16, 42])
+        text = (ROOT / "config/FrostOrtho.keymap").read_text(encoding="utf-8")
+        blocks = re.findall(
+            r'(\w+) \{\s*display-name = "[^"]+";\s*bindings = <(.*?)>;\s*sensor-bindings',
+            text, re.S)
+        self.assertEqual(blocks[0][0], "iOS_default_layer")
+        def keys(raw):
+            return ["&" + " ".join(x.split()) for x in raw.split("&")[1:]]
+        base = keys(blocks[0][1])
+        self.assertEqual(base[36:41], [
+            "&kp BACKSPACE", "&lt 6 ENTER", "&kp DELETE",
+            "&lt 2 ESC", "&lt_ScrollLayer_iOS 0 SLASH"])
+        self.assertEqual(keys(blocks[2][1])[38], "&mo 10")
+        for combo in re.findall(r'key-positions = <([^>]+)>', text):
+            self.assertTrue(all(0 <= int(i) < 41 for i in combo.split()))
+        self.assertIn("layers = <9>", (SHIELD / "FrostOrtho_R.overlay").read_text(encoding="utf-8"))
+        self.assertNotIn("&zip_temp_layer", text)
 
     def test_frostortho_pins(self):
         dtsi = (SHIELD / "FrostOrtho.dtsi").read_text(encoding="utf-8")

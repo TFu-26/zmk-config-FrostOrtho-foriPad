@@ -12,7 +12,7 @@ static int pressed(struct zmk_behavior_binding *binding, struct zmk_behavior_bin
         return -EINVAL;
     }
     const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
-    return input_report_rel(dev, INPUT_REL_WHEEL, binding->param1 ? 1 : -1, true, K_NO_WAIT);
+    return input_report_rel(dev, INPUT_REL_WHEEL, binding->param1 ? 2 : -2, true, K_NO_WAIT);
 }
 
 static int released(struct zmk_behavior_binding *binding, struct zmk_behavior_binding_event event) {

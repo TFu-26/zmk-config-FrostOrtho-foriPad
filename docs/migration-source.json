@@ -17,7 +17,9 @@
   "paw3222": "df652881be2520bde4f64ab6ca35e4c5708f4f9b",
   "owner_confirmed": {
     "detents_per_rotation": 24,
-    "host_layout": "JIS"
+    "host_layout": "JIS",
+    "encoder_direction": "Previous firmware direction confirmed on hardware; preserved",
+    "key_mapping": "Omit left source 15/27; right bottom source 40,41,28,16,42"
   },
   "physical_hardware_verified": false
 }
