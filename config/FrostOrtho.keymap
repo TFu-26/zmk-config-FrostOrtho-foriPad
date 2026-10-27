@@ -143,7 +143,7 @@
         };
 
         edit_horizontal_scroll {
-            display-name = "Edit / horizontal scroll";
+            display-name = "Edit/HScroll";
             bindings = <
                 &kp LG(Z)  &kp LG(LS(Z))  &kp LG(F)  &kp LG(R)  &kp LG(T)  &ios_home  &kp LG(SPACE)  &kp LG(TAB)  &kp LG(W)  &trans
                 &kp LG(A)  &kp LG(S)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
