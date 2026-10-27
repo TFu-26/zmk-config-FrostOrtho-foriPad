@@ -88,7 +88,8 @@ v1.0.0のPMW3610向け設定には換装ガイドのPAW3222設定を適用して
 | BLE役割 | peripheral | central |
 
 PAW3222は換装ガイド通り、XY反転・2/3倍のカーソル倍率を継承。
-PrimeOrbのSPIピンや電池ADC設定はコピーしていない。NFCTピンは両側ともGPIO化。
+StandardのPAW3222配線もSCK=P0.05、SDIO=P0.04、CS=P0.09、IRQ=P0.02で一致する。
+Mini/Standardのマトリクスや電池ADC設定はコピーしていない。右の物理UARTはD6/D7と行列の競合を避けるため無効化する（USB Studio用CDC UARTとは別）。NFCTピンは両側ともGPIO化。
 
 ## ビルドと書き込み
 GitHub Actionsは設定検証、エンコーダーのC++テスト（ASan/UBSan）後、
